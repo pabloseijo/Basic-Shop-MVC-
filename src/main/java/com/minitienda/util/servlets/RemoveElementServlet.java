@@ -1,5 +1,6 @@
 package com.minitienda.util.servlets;
 
+import JavaBeans.CarritoJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,14 +21,15 @@ public class RemoveElementServlet extends HttpServlet {
 
         HttpSession sesion = request.getSession();
         if (sesion != null) {
-            HashMap<String, Integer> carro = (HashMap<String, Integer>) sesion.getAttribute("carro");
+            CarritoJB carro = (CarritoJB) sesion.getAttribute("carro");
             if (carro != null) {
-                Integer cantidad = carro.get(prod);
+                HashMap<String,Integer> lista = carro.getLista();
+                Integer cantidad = lista.get(prod);
                 if (cantidad != null) {
                     if (cantidad > 1) {
-                        carro.put(prod, cantidad - 1); // Decrementa la cantidad en 1
+                        lista.put(prod, cantidad - 1); // Decrementa la cantidad en 1
                     } else {
-                        carro.remove(prod); // Elimina el producto si la cantidad es 0
+                        lista.remove(prod); // Elimina el producto si la cantidad es 0
                     }
                 }
             }

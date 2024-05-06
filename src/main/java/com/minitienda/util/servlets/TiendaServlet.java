@@ -1,5 +1,6 @@
 package com.minitienda.util.servlets;
 
+import JavaBeans.CarritoJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,9 +27,9 @@ public class TiendaServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
 
         // Obtener o crear la lista de productos en el carro desde la sesión
-        HashMap<String,Integer> carro = (HashMap<String, Integer>) session.getAttribute("carro");
+        CarritoJB carro = (CarritoJB) session.getAttribute("carro");
         if (carro == null) {
-            carro = new HashMap<>();
+            carro = new CarritoJB();
             session.setAttribute("carro", carro);
         }
 
@@ -37,8 +38,9 @@ public class TiendaServlet extends HttpServlet {
         String cantidad = request.getParameter("cantidad");
         Integer cant = Integer.valueOf(cantidad);
         if (producto != null && !producto.isEmpty()) {
-            int count = carro.containsKey(producto) ? carro.get(producto) : 0;
-            carro.put(producto, count + cant);
+            HashMap<String,Integer> lista = carro.getLista();
+            int count = lista.containsKey(producto) ? lista.get(producto) : 0;
+            lista.put(producto, count + cant);
         }
 
         // Redirigir a la página del carro
