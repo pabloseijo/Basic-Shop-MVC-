@@ -22,7 +22,7 @@ CREATE TABLE productos(
     nombre varchar(50) not null,
     precio float not null,
     stock int not null,
-    descripcion varchar(50) not null,
+    descripcion varchar(150) not null,
 );
 
 CREATE TABLE pedidos (
