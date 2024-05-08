@@ -14,17 +14,17 @@ VALUES
 ('monica.gil@example.org', 'Moni2024!', '370000000000002', 'American Express'),
 ('pablo.vargas@correo.com', 'Pablo$2024', '6011800000001234', 'Discover');
 
+-- Insertamos unos cuantos productos
 INSERT INTO productos (nombre, precio, stock, descripcion)
 VALUES
-('Proteína Whey', 29.99, 50, 'Proteína en polvo de suero para recuperación muscular rápida, sabor chocolate, 1 kg'),
-('Leggings de compresión', 35.00, 30, 'Leggings deportivos para maximizar el rendimiento durante el entrenamiento, tamaño mediano'),
-('Camiseta técnica', 19.95, 75, 'Camiseta ligera y transpirable para entrenamientos intensos, talla única'),
-('Cinta de correr', 899.00, 10, 'Cinta de correr con monitorización de ritmo cardíaco y programas preestablecidos, ideal para cardio en casa'),
-('Set de mancuernas ajustables', 199.99, 15, 'Conjunto de mancuernas ajustables de 2 a 24 kg, perfectas para un entrenamiento de fuerza variable'),
-('Bicicleta estática', 259.00, 12, 'Bicicleta estática con resistencia ajustable y seguimiento de actividad'),
-('Barra olímpica', 120.00, 20, 'Barra olímpica de 20 kg para levantamiento de pesas y entrenamiento de fuerza'),
-('Máquina de remo', 420.00, 8, 'Máquina de remo para uso doméstico con resistencia ajustable y seguimiento digital'),
-('Gel energético', 1.99, 150, 'Gel energético con cafeína para un impulso rápido durante el ejercicio'),
-('Botella de agua deportiva', 9.99, 80, 'Botella de agua de 750 ml con tapa a prueba de fugas, ideal para todos los tipos de entrenamientos');
-
+('Abbey Road - The Beatles', 19.99, 25, 'Vinilo del álbum clásico de The Beatles, lanzado en 1969. Incluye éxitos como "Come Together" y "Something".'),
+('Back in Black - AC/DC', 17.99, 20, 'Vinilo del álbum emblemático de AC/DC, lanzado en 1980. Contiene la famosa canción "Back in Black".'),
+('Thriller - Michael Jackson', 22.99, 30, 'Vinilo del álbum más vendido de todos los tiempos de Michael Jackson, lanzado en 1982. Incluye el éxito "Billie Jean".'),
+('The Dark Side of the Moon - Pink Floyd', 21.99, 15, 'Vinilo del álbum icónico de Pink Floyd, lanzado en 1973. Contiene clásicos como "Time" y "Money".'),
+('Rumours - Fleetwood Mac', 18.99, 18, 'Vinilo del álbum superventas de Fleetwood Mac, lanzado en 1977. Incluye canciones como "Dreams" y "Go Your Own Way".'),
+('The Joshua Tree - U2', 16.99, 12, 'Vinilo del álbum aclamado de U2, lanzado en 1987. Incluye éxitos como "With or Without You" y "I Still Haven\'t Found What I\'m Looking For".'),
+('Hotel California - Eagles', 19.49, 10, 'Vinilo del álbum clásico de Eagles, lanzado en 1976. Contiene la famosa canción "Hotel California".'),
+('Born to Run - Bruce Springsteen', 20.49, 15, 'Vinilo del álbum icónico de Bruce Springsteen, lanzado en 1975. Incluye la canción "Born to Run".'),
+('21 - Adele', 15.99, 20, 'Vinilo del álbum superventas de Adele, lanzado en 2011. Contiene éxitos como "Rolling in the Deep" y "Someone Like You".'),
+('Greatest Hits - Queen', 22.49, 25, 'Vinilo del álbum de grandes éxitos de Queen, lanzado en 1981. Incluye canciones icónicas como "Bohemian Rhapsody" y "Another One Bites the Dust".');
 
