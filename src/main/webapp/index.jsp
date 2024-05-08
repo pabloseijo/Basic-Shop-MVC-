@@ -20,7 +20,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="text-center mb-4">
-        <img src="/images/fachero_shop.png" class="img-fluid" alt="Logo">
+        <img src="images/fachero_shop.png" class="img-fluid" alt="Logo">
       </div>
     </div>
   </div>
