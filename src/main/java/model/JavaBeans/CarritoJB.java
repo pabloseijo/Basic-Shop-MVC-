@@ -1,4 +1,4 @@
-package JavaBeans;
+package model.JavaBeans;
 
 import java.io.Serializable;
 import java.util.HashMap;

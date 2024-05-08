@@ -1,6 +1,6 @@
-package com.minitienda.util.servlets;
+package com.minitienda.util.controller.servlets;
 
-import JavaBeans.CarritoJB;
+import model.JavaBeans.CarritoJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

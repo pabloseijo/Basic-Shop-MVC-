@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>TiendaServlet</servlet-name>
-        <servlet-class>com.minitienda.util.servlets.TiendaServlet</servlet-class>
+        <servlet-class>com.minitienda.util.controller.servlets.TiendaServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TiendaServlet</servlet-name>
@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>RemoveElementServlet</servlet-name>
-        <servlet-class>com.minitienda.util.servlets.RemoveElementServlet</servlet-class>
+        <servlet-class>com.minitienda.util.controller.servlets.RemoveElementServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RemoveElementServlet</servlet-name>
@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.minitienda.util.servlets.LoginServlet</servlet-class>
+        <servlet-class>com.minitienda.util.controller.servlets.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>ResetCarroServlet</servlet-name>
-        <servlet-class>com.minitienda.util.servlets.ResetCarroServlet</servlet-class>
+        <servlet-class>com.minitienda.util.controller.servlets.ResetCarroServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

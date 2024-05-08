@@ -1,4 +1,4 @@
-<%@ page import="JavaBeans.CarritoJB" %>
+<%@ page import="model.JavaBeans.CarritoJB" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

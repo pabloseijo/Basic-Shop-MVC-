@@ -2,38 +2,34 @@
 -- @autor: David Carpintero y Pablo Seijo
 -- @fecha:02/May/2024
 
--- Creacion de la base de datos
-CREATE DATABASE IF NOT EXISTS Minitienda;
-
--- Conexion a la base de datos
-USE Minitienda;
-
 -- Creacion de las tablas
+-- Creación de las tablas en PostgreSQL
+
 CREATE TABLE usuarios(
-    id int auto_increment primary key,
-    correo varchar(50) not null,
-    password varchar(50) not null,
-    numeroTarjeta varchar(50) not null,
-    tipoTarjeta varchar(50) not null,
+                         id SERIAL PRIMARY KEY,
+                         correo VARCHAR(50) NOT NULL,
+                         password VARCHAR(50) NOT NULL,
+                         numeroTarjeta VARCHAR(50) NOT NULL,
+                         tipoTarjeta VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE productos(
-    id int auto_increment primary key,
-    nombre varchar(50) not null,
-    precio float not null,
-    stock int not null,
-    descripcion varchar(150) not null,
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    precio FLOAT NOT NULL,
+    descripcion VARCHAR(150) NOT NULL
 );
 
 CREATE TABLE pedidos (
-    id int auto_increment primary key,
-    idUsuario int not null,
-    idProducto int not null,
-    fecha date not null,
-    total float not null,
-    foreign key (idUsuario) references usuarios(id),
-    foreign key (idProducto) references productos(id)
+                         id SERIAL PRIMARY KEY,
+                         idUsuario INT NOT NULL,
+                         idProducto INT NOT NULL,
+                         fecha DATE NOT NULL,
+                         total FLOAT NOT NULL,
+                         FOREIGN KEY (idUsuario) REFERENCES usuarios(id),
+                         FOREIGN KEY (idProducto) REFERENCES productos(id)
 );
+
 
 
 

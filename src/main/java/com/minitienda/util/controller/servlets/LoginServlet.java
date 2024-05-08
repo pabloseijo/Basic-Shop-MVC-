@@ -1,4 +1,4 @@
-package com.minitienda.util.servlets;
+package com.minitienda.util.controller.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
