@@ -88,7 +88,7 @@
                 for (ProductoJB producto : productos) {
             %>
             <option class="list-group-item">
-              <%= producto.getNombre() %> | <%= producto.getPrecio() %> $
+              <%= producto.getNombre() %> | $<%= producto.getPrecio() %>
             </option>
             <%
               }

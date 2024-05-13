@@ -42,8 +42,6 @@
                         String producto = entry.getKey();
                         StringTokenizer t = new StringTokenizer(producto,"|");
                         t.nextToken();
-                        t.nextToken();
-                        t.nextToken();
                         String precioString = t.nextToken();
                         precioString = precioString.replace('$',' ').trim();
                         Integer cantidad = entry.getValue();

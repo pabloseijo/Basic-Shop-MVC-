@@ -32,7 +32,7 @@ public class TiendaServlet extends HttpServlet {
         }
 
         // Añadir el producto al carro
-        String producto = request.getParameter("CD");
+        String producto = request.getParameter("producto");
         String cantidad = request.getParameter("cantidad");
         Integer cant = Integer.valueOf(cantidad);
         if (producto != null && !producto.isEmpty()) {
