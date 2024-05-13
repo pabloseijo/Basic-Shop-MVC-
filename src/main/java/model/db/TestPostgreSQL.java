@@ -94,25 +94,7 @@ public class TestPostgreSQL {
         }
     }
 
-    public ArrayList<ProductoJB> getProductos() throws Exception {
-        String sql = "SELECT * FROM productos";
-        ResultSet rs = ejecutarConsulta(sql);
 
-        ArrayList<ProductoJB> productos = new ArrayList<>();
-
-        while (rs.next()) {
-            ProductoJB p = new ProductoJB();
-            p.setId(rs.getInt("id"));
-            p.setNombre(rs.getString("nombre"));
-            p.setPrecio(rs.getDouble("precio"));
-            p.setDescripcion(rs.getString("descripcion"));
-            productos.add(p);
-        }
-
-        rs.close();
-
-        return productos;
-    }
 
     public void addUser(String email, String password, String numeroTarjeta, String tipoTarjeta) throws Exception {
         String sql = "INSERT INTO usuarios (correo, password, numeroTarjeta, tipoTarjeta) VALUES ('" + email + "', '" + password + "','" + numeroTarjeta + "', '" + tipoTarjeta + "')";

@@ -1,8 +1,11 @@
+<%@ page import="model.db.ConnectionPool, model.JavaBeans.ProductoJB" %>
+<%@ page import="java.sql.Connection,java.sql.PreparedStatement,java.sql.ResultSet,java.sql.SQLException" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>JSP - Productos</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -12,6 +15,9 @@
     }
     h1, h2, h3, h4, h5, h6 {
       color: #ffffff;
+    }
+    .list-group-item {
+      color: #000000; /* Cambia el color de la letra a negro */
     }
   </style>
 </head>
@@ -26,26 +32,72 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <h1 class="text-center mb-4">Música para DAA</h1>
+      <h1 class="text-center mb-4">Productos Disponibles</h1>
     </div>
   </div>
   <hr>
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-8">
+      <h2 class="text-center mb-4">Lista de Productos</h2>
       <form action="TiendaServlet" method="post">
         <div class="form-group">
-          <label for="CD">CD:</label>
-          <select class="form-control" id="CD" name="CD">
-            <option>Yuan | The Guo Brothers | China | $14.95</option>
-            <option>Drums of Passion | Babatunde Olatunji | Nigeria | $16.95</option>
-            <option>Kaira | Tounami Diabate| Mali | $16.95</option>
-            <option>The Lion is Loose | Eliades Ochoa | Cuba | $13.95</option>
-            <option>Dance the Devil Away | Outback | Australia | $14.95</option>
-            <option>Record of Changes | Samulnori | Korea | $12.95</option>
-            <option>Djelika | Tounami Diabate | Mali | $14.95</option>
-            <option>Rapture | Nusrat Fateh Ali Khan | Pakistan | $12.95</option>
-            <option>Cesaria Evora | Cesaria Evora | Cape Verde | $16.95</option>
-            <option>DAA | GSTIC | Spain | $50.00</option>
+          <label for="producto">Producto:</label>
+          <select class="form-control" id="producto" name="producto">
+            <%
+              ArrayList<ProductoJB> productos = new ArrayList<>();
+              ConnectionPool pool = ConnectionPool.getInstance();
+              Connection connection = null;
+              PreparedStatement ps = null;
+              ResultSet rs = null;
+
+              try {
+                connection = pool.getConnection();
+                String sql = "SELECT * FROM productos";
+                ps = connection.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                  ProductoJB p = new ProductoJB();
+                  p.setId(rs.getInt("id"));
+                  p.setNombre(rs.getString("nombre"));
+                  p.setPrecio(rs.getDouble("precio"));
+                  p.setDescripcion(rs.getString("descripcion"));
+                  productos.add(p);
+                }
+              } catch (SQLException e) {
+                e.printStackTrace();
+              } finally {
+                if (rs != null) {
+                  try {
+                    rs.close();
+                  } catch (SQLException e) {
+                    e.printStackTrace();
+                  }
+                }
+                if (ps != null) {
+                  try {
+                    ps.close();
+                  } catch (SQLException e) {
+                    e.printStackTrace();
+                  }
+                }
+                pool.closeConnection(connection);
+              }
+
+              if (!productos.isEmpty()) {
+                for (ProductoJB producto : productos) {
+            %>
+            <option class="list-group-item">
+              <%= producto.getNombre() %> | <%= producto.getPrecio() %> $
+            </option>
+            <%
+              }
+            } else {
+            %>
+            <option class="list-group-item">No hay productos disponibles.</option>
+            <%
+              }
+            %>
           </select>
         </div>
         <div class="form-group">
