@@ -46,17 +46,17 @@
                         precioString = precioString.replace('$',' ').trim();
                         Integer cantidad = entry.getValue();
                         Double importe = cantidad * Double.parseDouble(precioString);
-                        importeTotal+=importe;
-        %>
-        <li>
-            <%= producto %> - Cantidad: <%= cantidad %> - Importe: <%= importe %>
-            <!-- Agregar un formulario para eliminar este producto -->
-            <form action="Remove" method="post" style="display: inline;">
-                <input type="hidden" name="producto" value="<%= producto %>">
-                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-            </form>
-        </li>
-        <%
+                        importeTotal += importe;
+                    %>
+                    <li>
+                        <%= producto %> - Cantidad: <%= cantidad %> - Importe: <%= importe %>
+                        <!-- Agregar un formulario para eliminar este producto -->
+                        <form action="Remove" method="post" style="display: inline;">
+                            <input type="hidden" name="producto" value="<%= producto %>">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </li>
+                    <%
                     }
                     carro.setImporteTotal(importeTotal);
                 }

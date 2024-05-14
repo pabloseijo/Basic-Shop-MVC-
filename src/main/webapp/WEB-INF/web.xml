@@ -41,5 +41,14 @@
         <servlet-name>ResetCarroServlet</servlet-name>
         <url-pattern>/reset</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RegistroServlet</servlet-name>
+        <servlet-class>com.minitienda.util.controller.servlets.RegistroServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegistroServlet</servlet-name>
+        <url-pattern>/registro</url-pattern>
+    </servlet-mapping>
 </web-app>
 

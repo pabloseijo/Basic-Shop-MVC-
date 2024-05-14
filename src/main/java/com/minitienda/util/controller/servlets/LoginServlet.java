@@ -5,30 +5,68 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.db.ConnectionPool;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginServlet extends HttpServlet {
-    private void log(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    private void log(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, ServletException {
         // Obtener los parámetros del formulario
-        String email = request.getParameter("email");
+        String correo = request.getParameter("correo");
         String password = request.getParameter("password");
 
-        // Aquí podrías hacer la lógica de autenticación, como verificar en una base de datos
-        // En este ejemplo, simplemente imprimiré los datos recibidos
-        System.out.println("Correo: " + email);
-        System.out.println("Contraseña: " + password);
+        // Obtener conexión
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        // Redireccionar o mostrar algún mensaje según el resultado de la autenticación
-        // Por ejemplo:
-        HttpSession session = request.getSession();
-        session.setAttribute("connect", true);
-        response.sendRedirect("finalizarCompra.jsp");
+        try {
+            con = pool.getConnection();
+            String query = "SELECT * FROM usuarios WHERE correo = ? AND password = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, correo);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Usuario encontrado, establecer sesión y redirigir
+                HttpSession session = request.getSession();
+                session.setAttribute("connect", true);
+                response.sendRedirect("finalizarCompra.jsp");
+            } else {
+                // Usuario no encontrado, redirigir a register.jsp
+                response.sendRedirect("register.jsp");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (con != null) pool.closeConnection(con);
+        }
     }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log(request, response);
+        try {
+            log(request, response);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log(request, response);
+        try {
+            log(request, response);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

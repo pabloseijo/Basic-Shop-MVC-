@@ -24,8 +24,8 @@
   %>
   <form action="login" method="post">
     <div class="form-group">
-      <label for="email">Correo:</label>
-      <input type="email" class="form-control" id="email" name="email" required>
+      <label for="correo">Correo:</label>
+      <input type="email" class="form-control" id="correo" name="correo" required>
     </div>
     <div class="form-group">
       <label for="password">Contraseña:</label>
