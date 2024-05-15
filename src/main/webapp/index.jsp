@@ -1,6 +1,8 @@
 <%@ page import="model.db.ConnectionPool, model.JavaBeans.ProductoJB" %>
 <%@ page import="java.sql.Connection,java.sql.PreparedStatement,java.sql.ResultSet,java.sql.SQLException" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model.JavaBeans.PedidoJB" %>
+<%@ page import="model.JavaBeans.UsuarioJB" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -111,6 +113,79 @@
     </div>
   </div>
   <hr>
+  <%
+    UsuarioJB user = (UsuarioJB) session.getAttribute("user");
+    if (user != null) {
+      ArrayList<PedidoJB> pedidos = new ArrayList<>();
+      Connection connectionPedidos = null;
+      PreparedStatement psPedidos = null;
+      ResultSet rsPedidos = null;
+
+      try {
+        connectionPedidos = pool.getConnection();
+        String sqlPedidos = "SELECT * FROM pedidos WHERE idUsuario = ?";
+        psPedidos = connectionPedidos.prepareStatement(sqlPedidos);
+        psPedidos.setInt(1, user.getId());
+        rsPedidos = psPedidos.executeQuery();
+
+        while (rsPedidos.next()) {
+          PedidoJB pedido = new PedidoJB();
+          pedido.setId(rsPedidos.getInt("id"));
+          pedido.setIdUsuario(rsPedidos.getInt("idUsuario"));
+          pedido.setFecha(rsPedidos.getDate("fecha"));
+          pedido.setTotal(rsPedidos.getFloat("total"));
+          pedidos.add(pedido);
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      } finally {
+        if (rsPedidos != null) {
+          try {
+            rsPedidos.close();
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+        }
+        if (psPedidos != null) {
+          try {
+            psPedidos.close();
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+        }
+        pool.closeConnection(connectionPedidos);
+      }
+
+      if (!pedidos.isEmpty()) {
+    %>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center mb-4">Tus Pedidos</h2>
+        <ul class="list-group">
+          <%
+            for (PedidoJB pedido : pedidos) {
+          %>
+          <li class="list-group-item">
+            Pedido ID: <%= pedido.getId() %> | Fecha: <%= pedido.getFecha() %> | Total: $<%= pedido.getTotal() %>
+          </li>
+          <%
+            }
+          %>
+        </ul>
+      </div>
+    </div>
+    <%
+    } else {
+    %>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center mb-4">No has realizado ningún pedido.</h2>
+      </div>
+    </div>
+    <%
+        }
+      }
+    %>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

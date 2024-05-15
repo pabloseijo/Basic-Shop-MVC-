@@ -50,5 +50,15 @@
         <servlet-name>RegistroServlet</servlet-name>
         <url-pattern>/registro</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PedidoServlet</servlet-name>
+        <servlet-class>com.minitienda.util.controller.servlets.PedidoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PedidoServlet</servlet-name>
+        <url-pattern>/pedido</url-pattern>
+    </servlet-mapping>
 </web-app>
 

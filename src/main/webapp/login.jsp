@@ -18,7 +18,7 @@
 <div class="container">
   <h1 class="text-center">Login</h1>
   <%
-    if (session != null && session.getAttribute("connect") != null && (boolean) session.getAttribute("connect")) {
+    if (session != null && session.getAttribute("user") != null) {
       response.sendRedirect("finalizarCompra.jsp");
     }
   %>

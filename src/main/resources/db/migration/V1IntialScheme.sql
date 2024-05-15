@@ -14,20 +14,18 @@ CREATE TABLE usuarios(
 );
 
 CREATE TABLE productos(
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    precio FLOAT NOT NULL,
-    descripcion VARCHAR(150) NOT NULL
+                        id SERIAL PRIMARY KEY,
+                        nombre VARCHAR(50) NOT NULL,
+                        precio FLOAT NOT NULL,
+                        descripcion VARCHAR(150) NOT NULL
 );
 
 CREATE TABLE pedidos (
                          id SERIAL PRIMARY KEY,
                          idUsuario INT NOT NULL,
-                         idProducto INT NOT NULL,
                          fecha DATE NOT NULL,
                          total FLOAT NOT NULL,
-                         FOREIGN KEY (idUsuario) REFERENCES usuarios(id),
-                         FOREIGN KEY (idProducto) REFERENCES productos(id)
+                         FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
 
 

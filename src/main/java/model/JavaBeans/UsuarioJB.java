@@ -3,7 +3,7 @@ package model.JavaBeans;
 import java.io.Serializable;
 
 public class UsuarioJB implements Serializable {
-    private String nombre;
+    private Integer id;
     private String email;
     private String tipo_tarjeta;
     private String num_tarjeta;
@@ -11,12 +11,12 @@ public class UsuarioJB implements Serializable {
 
     }
 
-    public String getEmail() {
-        return email;
+    public Integer getId() {
+        return id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEmail() {
+        return email;
     }
 
     public String getNum_tarjeta() {
@@ -25,10 +25,6 @@ public class UsuarioJB implements Serializable {
 
     public String getTipo_tarjeta() {
         return tipo_tarjeta;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public void setEmail(String email) {
@@ -41,5 +37,9 @@ public class UsuarioJB implements Serializable {
 
     public void setTipo_tarjeta(String tipo_tarjeta) {
         this.tipo_tarjeta = tipo_tarjeta;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.JavaBeans.UsuarioJB;
 import model.db.ConnectionPool;
 
 import java.io.IOException;
@@ -37,7 +38,14 @@ public class LoginServlet extends HttpServlet {
             if (rs.next()) {
                 // Usuario encontrado, establecer sesión y redirigir
                 HttpSession session = request.getSession();
-                session.setAttribute("connect", true);
+                if(session.getAttribute("user") == null) {
+                    UsuarioJB user = new UsuarioJB();
+                    user.setId(rs.getInt(1));
+                    user.setEmail(correo);
+                    user.setNum_tarjeta(rs.getString(4));
+                    user.setTipo_tarjeta(rs.getString(5));
+                    session.setAttribute("user",user);
+                }
                 response.sendRedirect("finalizarCompra.jsp");
             } else {
                 // Usuario no encontrado, redirigir a register.jsp
