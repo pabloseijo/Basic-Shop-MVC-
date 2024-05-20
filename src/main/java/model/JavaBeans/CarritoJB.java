@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class CarritoJB implements Serializable {
     private HashMap<String,Integer> lista;
-    Double importeTotal;
+    private Double importeTotal;
     public CarritoJB() {
         lista = new HashMap<>();
         importeTotal = 0.0;
