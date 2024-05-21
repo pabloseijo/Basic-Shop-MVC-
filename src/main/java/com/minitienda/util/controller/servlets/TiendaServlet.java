@@ -14,12 +14,6 @@ import java.util.HashMap;
 public class TiendaServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.write("<html><body><h4>PUTO</h4></body></html>");
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener la sesión del usuario (o crear una nueva si no existe)
         HttpSession session = request.getSession(true);

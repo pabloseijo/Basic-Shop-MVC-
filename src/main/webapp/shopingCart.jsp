@@ -65,7 +65,7 @@
     </ul>
     <p class="text-center">Precio total: <%= importeTotal %></p>
     <div class="text-center">
-        <a href="index.jsp" class="btn btn-primary mr-2">Continuar Comprando</a>
+        <a href="tienda.jsp" class="btn btn-primary mr-2">Continuar Comprando</a>
         <a href="login.jsp" class="btn btn-success">PAGAR PEDIDO</a>
     </div>
 </div>

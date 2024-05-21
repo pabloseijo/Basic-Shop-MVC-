@@ -1,13 +1,7 @@
-<%@ page import="model.db.ConnectionPool, model.JavaBeans.ProductoJB" %>
-<%@ page import="java.sql.Connection,java.sql.PreparedStatement,java.sql.ResultSet,java.sql.SQLException" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="model.JavaBeans.PedidoJB" %>
-<%@ page import="model.JavaBeans.UsuarioJB" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Productos</title>
+  <title>Fachero Shop - Portada</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -34,158 +28,13 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <h1 class="text-center mb-4">Productos Disponibles</h1>
-    </div>
-  </div>
-  <hr>
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <h2 class="text-center mb-4">Lista de Productos</h2>
-      <form action="TiendaServlet" method="post">
-        <div class="form-group">
-          <label for="producto">Producto:</label>
-          <select class="form-control" id="producto" name="producto">
-            <%
-              ArrayList<ProductoJB> productos = new ArrayList<>();
-              ConnectionPool pool = ConnectionPool.getInstance();
-              Connection connection = null;
-              PreparedStatement ps = null;
-              ResultSet rs = null;
-
-              try {
-                connection = pool.getConnection();
-                String sql = "SELECT * FROM productos";
-                ps = connection.prepareStatement(sql);
-                rs = ps.executeQuery();
-
-                while (rs.next()) {
-                  ProductoJB p = new ProductoJB();
-                  p.setId(rs.getInt("id"));
-                  p.setNombre(rs.getString("nombre"));
-                  p.setPrecio(rs.getDouble("precio"));
-                  p.setDescripcion(rs.getString("descripcion"));
-                  productos.add(p);
-                }
-              } catch (SQLException e) {
-                e.printStackTrace();
-              } finally {
-                if (rs != null) {
-                  try {
-                    rs.close();
-                  } catch (SQLException e) {
-                    e.printStackTrace();
-                  }
-                }
-                if (ps != null) {
-                  try {
-                    ps.close();
-                  } catch (SQLException e) {
-                    e.printStackTrace();
-                  }
-                }
-                pool.closeConnection(connection);
-              }
-
-              if (!productos.isEmpty()) {
-                for (ProductoJB producto : productos) {
-            %>
-            <option class="list-group-item">
-              <%= producto.getNombre() %> | $<%= producto.getPrecio() %>
-            </option>
-            <%
-              }
-            } else {
-            %>
-            <option class="list-group-item">No hay productos disponibles.</option>
-            <%
-              }
-            %>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="cantidad">Cantidad:</label>
-          <input type="text" class="form-control" id="cantidad" name="cantidad" value="1">
-        </div>
+      <form action="ProductosServlet" method="post">
         <div class="text-center">
-          <button type="submit" class="btn btn-primary">Seleccionar Producto</button>
+          <button type="submit" class="btn btn-primary btn-lg">Ver Productos</button>
         </div>
       </form>
     </div>
   </div>
-  <hr>
-  <%
-    UsuarioJB user = (UsuarioJB) session.getAttribute("user");
-    if (user != null) {
-      ArrayList<PedidoJB> pedidos = new ArrayList<>();
-      Connection connectionPedidos = null;
-      PreparedStatement psPedidos = null;
-      ResultSet rsPedidos = null;
-
-      try {
-        connectionPedidos = pool.getConnection();
-        String sqlPedidos = "SELECT * FROM pedidos WHERE idUsuario = ?";
-        psPedidos = connectionPedidos.prepareStatement(sqlPedidos);
-        psPedidos.setInt(1, user.getId());
-        rsPedidos = psPedidos.executeQuery();
-
-        while (rsPedidos.next()) {
-          PedidoJB pedido = new PedidoJB();
-          pedido.setId(rsPedidos.getInt("id"));
-          pedido.setIdUsuario(rsPedidos.getInt("idUsuario"));
-          pedido.setFecha(rsPedidos.getDate("fecha"));
-          pedido.setTotal(rsPedidos.getFloat("total"));
-          pedidos.add(pedido);
-        }
-      } catch (SQLException e) {
-        e.printStackTrace();
-      } finally {
-        if (rsPedidos != null) {
-          try {
-            rsPedidos.close();
-          } catch (SQLException e) {
-            e.printStackTrace();
-          }
-        }
-        if (psPedidos != null) {
-          try {
-            psPedidos.close();
-          } catch (SQLException e) {
-            e.printStackTrace();
-          }
-        }
-        pool.closeConnection(connectionPedidos);
-      }
-
-      if (!pedidos.isEmpty()) {
-    %>
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <h2 class="text-center mb-4">Tus Pedidos</h2>
-        <ul class="list-group">
-          <%
-            for (PedidoJB pedido : pedidos) {
-          %>
-          <li class="list-group-item">
-            Pedido ID: <%= pedido.getId() %> | Fecha: <%= pedido.getFecha() %> | Total: $<%= pedido.getTotal() %>
-          </li>
-          <%
-            }
-          %>
-        </ul>
-      </div>
-    </div>
-    <%
-    } else {
-    %>
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <h2 class="text-center mb-4">No has realizado ningún pedido.</h2>
-      </div>
-    </div>
-    <%
-        }
-      }
-    %>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

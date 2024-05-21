@@ -20,7 +20,7 @@ public class ResetCarroServlet extends HttpServlet {
             }
         }
         // Redirigir a la página del carro
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("tienda.jsp");
     }
 
 }

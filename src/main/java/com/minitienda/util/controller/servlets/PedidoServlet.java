@@ -46,7 +46,7 @@ public class PedidoServlet extends HttpServlet {
 
             // Enviar mensaje de éxito
             request.setAttribute("message", "Pedido realizado con éxito.");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("tienda.jsp").forward(request, response);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,8 +57,4 @@ public class PedidoServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("finalizar.jsp");
-    }
 }
