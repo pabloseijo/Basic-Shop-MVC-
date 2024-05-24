@@ -23,13 +23,13 @@
     }
   %>
   <form action="login" method="post">
-    <div class="form-group">
-      <label for="correo">Correo:</label>
-      <input type="email" class="form-control" id="correo" name="correo" required>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">@</span>
+      <input type="email" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" id="correo" name="correo" required>
     </div>
-    <div class="form-group">
-      <label for="password">Contraseña:</label>
-      <input type="password" class="form-control" id="password" name="password" required>
+    <div class="input-group mb-3">
+      <span class="input-group-text">&#128274;</span> <!-- Icono de candado -->
+      <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" id="password" name="password" required>
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
   </form>

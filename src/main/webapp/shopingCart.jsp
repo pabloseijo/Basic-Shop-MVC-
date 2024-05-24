@@ -8,6 +8,7 @@
 <head>
     <title>CARRO</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <style>
         body {
             background-color: #343a40;
@@ -27,42 +28,60 @@
         li:last-child {
             margin-bottom: 0;
         }
+        tr{
+            color: white;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="text-center">TU CARRO WEY</h1>
-    <ul>
-        <%
-            Double importeTotal = 0.0;
-            if (session != null) {
-                CarritoJB carro = (CarritoJB) session.getAttribute("carro");
-                if (carro != null) {
-                    for (Map.Entry<String, Integer> entry : carro.getLista().entrySet()) {
-                        String producto = entry.getKey();
-                        StringTokenizer t = new StringTokenizer(producto,"|");
-                        t.nextToken();
-                        String precioString = t.nextToken();
-                        precioString = precioString.replace('$',' ').trim();
-                        Integer cantidad = entry.getValue();
-                        Double importe = cantidad * Double.parseDouble(precioString);
-                        importeTotal += importe;
-                    %>
-                    <li>
-                        <%= producto %> - Cantidad: <%= cantidad %> - Importe: <%= importe %>
-                        <!-- Agregar un formulario para eliminar este producto -->
-                        <form action="Remove" method="post" style="display: inline;">
-                            <input type="hidden" name="producto" value="<%= producto %>">
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        </form>
-                    </li>
-                    <%
+    <h1 class="text-center"><i class="bi bi-cart"></i> Carrito</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Importe</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                Double importeTotal = 0.0;
+                if (session != null) {
+                    CarritoJB carro = (CarritoJB) session.getAttribute("carro");
+                    if (carro != null) {
+                        for (Map.Entry<String, Integer> entry : carro.getLista().entrySet()) {
+                            String producto = entry.getKey();
+                            StringTokenizer t = new StringTokenizer(producto, "|");
+                            String nombreProducto = t.nextToken();
+                            String precioString = t.nextToken();
+                            precioString = precioString.replace('$', ' ').trim();
+                            Integer cantidad = entry.getValue();
+                            Double importe = cantidad * Double.parseDouble(precioString);
+                            importeTotal += importe;
+            %>
+            <tr>
+                <td><%= nombreProducto %></td>
+                <td><%= cantidad %></td>
+                <td>$<%= importe %></td>
+                <td>
+                    <form action="Remove" method="post" style="display: inline;">
+                        <input type="hidden" name="producto" value="<%= producto %>">
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            <%
+                        }
+                        carro.setImporteTotal(importeTotal);
                     }
-                    carro.setImporteTotal(importeTotal);
                 }
-            }
-        %>
-    </ul>
+            %>
+            </tbody>
+        </table>
+    </div>
     <p class="text-center">Precio total: <%= importeTotal %></p>
     <div class="text-center">
         <a href="tienda.jsp" class="btn btn-primary mr-2">Continuar Comprando</a>

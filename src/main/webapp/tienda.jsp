@@ -9,6 +9,7 @@
 <head>
     <title>JSP - Productos</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <style>
         body {
             background-color: #343a40;
@@ -20,6 +21,11 @@
         }
         .list-group-item {
             color: #000000; /* Cambia el color de la letra a negro */
+        }
+
+        tr{
+            color: black;
+            background-color: white;
         }
 
         .scrollable-list {
@@ -135,22 +141,35 @@
     <div class="row justify-content-center" style="padding-bottom: 20px;">
         <div class="col-md-8">
             <h2 class="text-center mb-4">Tus Pedidos</h2>
-            <div class="scrollable-list">
-                <ul class="list-group">
+            <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Pedido ID</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <%
                         for (int i = pedidos.size() - 1; i >= 0; i--) {
                             PedidoJB pedido = pedidos.get(i);
                     %>
-                    <li class="list-group-item">
-                        Pedido ID: <%= pedido.getId() %> | Fecha: <%= pedido.getFecha() %> | Total: $<%= pedido.getTotal() %>
-                    </li>
+                    <tr>
+                        <td><%= pedido.getId() %></td>
+                        <td><%= pedido.getFecha() %></td>
+                        <td>$<%= pedido.getTotal() %></td>
+                    </tr>
                     <%
                         }
                     %>
-                </ul>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
+
     <%
     } else {
     %>
@@ -163,6 +182,27 @@
             }
         }
     %>
+
+    <%
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
+    %>
+    <div id="successMessage" class="alert alert-success mt-3 text-center position-relative">
+        <%= message %>
+    </div>
+    <script>
+        setTimeout(function() {
+            var messageElement = document.getElementById('successMessage');
+            if (messageElement) {
+                messageElement.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+    <%
+        }
+    %>
+
+
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

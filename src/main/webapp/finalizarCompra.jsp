@@ -21,20 +21,12 @@
     <%
         CarritoJB carro = (CarritoJB) session.getAttribute("carro");
     %>
-    <p class="text-center">El importe total de la compra es: <%= carro.getImporteTotal() %></p>
+    <p class="text-center">El importe total de la compra es: <%= carro.getImporteTotal() %> $</p>
     <div class="text-center">
         <form action="pedido" method="post">
             <button type="submit" class="btn btn-success">Pagar y seguir comprando</button>
         </form>
     </div>
-    <%
-        String message = (String) request.getAttribute("message");
-        if (message != null) {
-    %>
-    <div class="alert alert-success mt-3 text-center"><%= message %></div>
-    <%
-        }
-    %>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

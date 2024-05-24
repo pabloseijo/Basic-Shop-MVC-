@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
                     user.setTipo_tarjeta(rs.getString(5));
                     session.setAttribute("user",user);
                 }
-                response.sendRedirect("finalizarCompra.jsp");
+                response.sendRedirect("shopingCart.jsp");
             } else {
                 // Usuario no encontrado, redirigir a register.jsp
                 response.sendRedirect("register.jsp");

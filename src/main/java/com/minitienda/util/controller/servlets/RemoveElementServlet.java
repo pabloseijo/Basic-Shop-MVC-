@@ -14,9 +14,8 @@ public class RemoveElementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String prod = request.getParameter("producto");
-        HttpSession ses = request.getSession();
-
         HttpSession sesion = request.getSession();
+
         if (sesion != null) {
             CarritoJB carro = (CarritoJB) sesion.getAttribute("carro");
             if (carro != null) {

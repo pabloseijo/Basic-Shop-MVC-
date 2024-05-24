@@ -18,21 +18,21 @@
 <div class="container">
     <h1 class="text-center">Registro</h1>
     <form action="registro" method="post">
-        <div class="form-group">
-            <label for="correo">Correo:</label>
-            <input type="email" class="form-control" id="correo" name="correo" required>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">ejemplo@gmail.com</span>
+            <input type="email" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" id="correo" name="correo" required>
         </div>
-        <div class="form-group">
-            <label for="password">Contraseña:</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+        <div class="input-group mb-3">
+            <span class="input-group-text">&#128274;</span> <!-- Icono de candado -->
+            <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" id="password" name="password" required>
         </div>
-        <div class="form-group">
-            <label for="numeroTarjeta">Número de Tarjeta:</label>
-            <input type="text" class="form-control" id="numeroTarjeta" name="numeroTarjeta" required>
+        <div class="input-group mb-3">
+            <span class="input-group-text">💳</span> <!-- Icono de tarjeta -->
+            <input type="text" class="form-control" placeholder="Número de Tarjeta" aria-label="Número de Tarjeta" id="numeroTarjeta" name="numeroTarjeta" required>
         </div>
-        <div class="form-group">
-            <label for="tipoTarjeta">Tipo de Tarjeta:</label>
-            <input type="text" class="form-control" id="tipoTarjeta" name="tipoTarjeta" required>
+        <div class="input-group mb-3">
+            <span class="input-group-text">💳</span> <!-- Icono de tarjeta -->
+            <input type="text" class="form-control" placeholder="Tipo de Tarjeta (visa, mastercard ..." aria-label="Tipo de Tarjeta" id="tipoTarjeta" name="tipoTarjeta" required>
         </div>
         <button type="submit" class="btn btn-primary">Registrarse</button>
     </form>
